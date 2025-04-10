@@ -1,0 +1,133 @@
+@use "./reset.scss";
+@use "./fonts.scss";
+
+$font-size-html: calc(1vw / 14.4);
+$main-color: #e71b1b;
+
+html {
+  font-size: $font-size-html;
+}
+
+body {
+  font-family: "Roboto", "sans-serif";
+  font-weight: 400;
+  font-size: 16rem;
+  background-color: #f6f6f6;
+}
+
+.container {
+  max-width: 900rem;
+  margin: 0 auto;
+  padding: 80rem 10rem;
+}
+
+.main-title {
+  font-size: 48rem;
+  line-height: 120%;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  color: $main-color;
+}
+
+.products-list {
+  padding-top: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+}
+
+.product-item {
+  background-color: #fff;
+  border-radius: 10rem;
+  box-shadow: 0 1rem 2rem 0 #0000001a;
+  padding: 24rem;
+  position: relative;
+}
+
+.product-hot-label {
+  font-size: 14rem;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  padding: 6rem;
+  position: absolute;
+  top: 10rem;
+  left: 10rem;
+  background-color: $main-color;
+  color: #fff;
+  border-radius: 10rem;
+}
+
+.product-wrapper {
+  display: flex;
+  gap: 20rem;
+}
+
+.product-image {
+  flex: 0 0 200rem;
+  width: 200rem;
+  height: 200rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #d1d1d1;
+  border-radius: 10rem;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  align-items: flex-start;
+}
+
+.product-name {
+  font-size: 22rem;
+  line-height: 120%;
+}
+
+.product-info-item {
+  line-height: 110%;
+  color: #6e6e6e;
+}
+
+.product-buy {
+  flex: 0 0 120rem;
+  display: flex;
+  gap: 10rem;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.prodct-price {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  align-items: flex-end;
+}
+
+.prodct-price.discount .prodct-price-old {
+  text-decoration: line-through;
+  font-size: 16rem;
+  opacity: 0.3;
+}
+
+.prodct-price.discount .prodct-price-new {
+  color: $main-color;
+}
+
+.prodct-price-item {
+  font-size: 26rem;
+  font-weight: 600;
+}
+
+.product-add-to-card-btn {
+  color: #fff;
+  background-color: #e71b1b;
+  display: block;
+  height: 46rem;
+  width: 100%;
+  border-radius: 10rem;
+  font-size: 16rem;
+}
