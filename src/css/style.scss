@@ -79,6 +79,7 @@ body {
   flex-direction: column;
   gap: 10rem;
   align-items: flex-start;
+  flex: 0 1 100%;
 }
 
 .product-name {
@@ -130,4 +131,32 @@ body {
   width: 100%;
   border-radius: 10rem;
   font-size: 16rem;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-content.hidden {
+  display: none;
+}
+
+.loader {
+  width: 48rem;
+  height: 48rem;
+  border: 5rem solid #d1d1d1;
+  border-bottom-color: $main-color;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
