@@ -125,12 +125,19 @@ body {
 
 .product-add-to-card-btn {
   color: #fff;
-  background-color: #e71b1b;
+  background-color: $main-color;
   display: block;
   height: 46rem;
   width: 100%;
   border-radius: 10rem;
   font-size: 16rem;
+}
+
+.product-add-to-card-btn.in-basket {
+  border: 1rem solid $main-color;
+  background-color: transparent;
+  color: $main-color;
+  cursor: not-allowed;
 }
 
 .loader-content {
@@ -159,4 +166,103 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.basket {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -500rem;
+  display: flex;
+  gap: 20rem;
+  align-items: flex-end;
+  transition: all 0.2s ease-in-out;
+}
+
+.basket.active {
+  right: 0;
+}
+
+.basket-paranja {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.basket.active .basket-paranja {
+  opacity: 1;
+  visibility: visible;
+}
+
+.basket-icon {
+  width: 50rem;
+  height: 50rem;
+  background-color: $main-color;
+  border-radius: 50rem;
+  margin-bottom: 20rem;
+  cursor: pointer;
+  background-image: url("./../assets/icons/basket.svg");
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.basket.active .basket-icon {
+  background-image: url("./../assets/icons/close.svg");
+  background-size: 50%;
+}
+
+.basket-wrapper {
+  height: 100%;
+  width: 500rem;
+  background-color: #fff;
+  box-shadow: 0 4rem 8rem 0 #0000001a;
+  padding: 24rem;
+  overflow-y: scroll;
+}
+
+.basket-title {
+  font-size: 32rem;
+}
+.basket-list {
+  padding-top: 20rem;
+}
+
+.basket-list-item {
+  padding: 14rem 0;
+  display: flex;
+  gap: 16rem;
+}
+
+.basket-list-item:not(:last-child) {
+  border-bottom: 1rem solid #d1d1d1;
+}
+
+.basket-product-photo {
+  flex: 0 0 100rem;
+  width: 100rem;
+  height: 100rem;
+  background-color: #d1d1d1;
+  border-radius: 10rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.basket-product-name {
+  font-size: 18rem;
+  line-height: 120%;
+}
+
+.basket-product-price {
+  font-weight: 600;
+  padding-top: 8rem;
 }

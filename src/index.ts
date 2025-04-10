@@ -8,8 +8,20 @@ import { http } from "./services/http.service";
 
 document.addEventListener("DOMContentLoaded", () => {
   const loader: HTMLElement = document.querySelector(".loader-content")!;
+  const basketIcon: HTMLElement = document.querySelector(".basket-icon")!;
+  const basketBlock: HTMLElement = document.querySelector(".basket")!;
+  const basketParanja: HTMLElement = document.querySelector(".basket-paranja")!;
+  const basketArr: Product[] = [];
 
-  getData({ limit: 20 });
+  basketParanja.addEventListener("click", () => {
+    basketBlock.classList.remove("active");
+  });
+
+  basketIcon.addEventListener("click", () => {
+    basketBlock.classList.toggle("active");
+  });
+
+  getData({ limit: 30 });
 
   async function getData(params: GetDataFuncProps = {}) {
     try {
@@ -17,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         params,
       });
       renderItems(responce.products);
+      addEventsListener(responce.products);
       hideLoader();
     } catch (error) {
       console.log(error);
@@ -30,13 +43,72 @@ document.addEventListener("DOMContentLoaded", () => {
     if (productsList) {
       productsList.innerHTML = "";
       products.forEach((product) => {
-        const html = generateHTMLMarkUp(product);
-        productsList.insertAdjacentHTML("afterbegin", html);
+        const html = generateHTMLMarkUpProductsList(product);
+        productsList.insertAdjacentHTML("beforeend", html);
       });
     }
   }
 
-  function generateHTMLMarkUp(product: Product) {
+  function addEventsListener(products: Product[]) {
+    const productsBtns: NodeListOf<Element> = document.querySelectorAll(
+      ".product-add-to-card-btn"
+    );
+
+    productsBtns.forEach((btn, index) => {
+      btn.addEventListener("click", () => {
+        btn.innerHTML = "В корзине";
+        btn.classList.add("in-basket");
+        addToBasket(products[index]);
+      });
+    });
+  }
+
+  function addToBasket(product: Product) {
+    const isExist = basketArr.find((item) => item.id === product.id);
+
+    if (!isExist) {
+      basketArr.push({ ...product });
+      renderBasketItems();
+    }
+  }
+
+  function renderBasketItems() {
+    const basketRoot: HTMLElement | null =
+      document.querySelector(".basket-list");
+
+    if (basketRoot) {
+      basketRoot.innerHTML = "";
+      basketArr.forEach((item) => {
+        const html = generateHTMLMarkUpBasket(item);
+        basketRoot.insertAdjacentHTML("beforeend", html);
+      });
+    }
+  }
+
+  function generateHTMLMarkUpBasket(product: Product) {
+    let html: string;
+
+    return `
+      <li class="basket-list-item">
+        <div class="basket-product-photo" style="background-image: url('${
+          product.image
+        }')"></div>
+        <div>
+          <p class="basket-product-name">${product.title}</p>
+          <p class="basket-product-price">${
+            product.discount
+              ? (
+                  product.price -
+                  (product.price * product.discount) / 100
+                ).toFixed()
+              : product.price
+          }$</p>
+        </div>
+      </li>
+    `;
+  }
+
+  function generateHTMLMarkUpProductsList(product: Product) {
     let html: string;
 
     const productItemClasses = product.popular
